@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             dgvTheaters = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             theaterBindingSource = new BindingSource(components);
             btnAdd = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             SuspendLayout();
@@ -55,21 +55,7 @@
             dgvTheaters.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTheaters.Size = new Size(386, 244);
             dgvTheaters.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.FillWeight = 15F;
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            titleDataGridViewTextBoxColumn.HeaderText = "Theater Name";
-            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            dgvTheaters.CellDoubleClick += dgvTheaters_CellDoubleClick;
             // 
             // theaterBindingSource
             // 
@@ -103,6 +89,22 @@
             btnDelete.Text = "DELETE";
             btnDelete.UseVisualStyleBackColor = true;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.FillWeight = 15F;
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn.HeaderText = "Theater Name";
+            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -113,7 +115,8 @@
             Controls.Add(btnAdd);
             Controls.Add(dgvTheaters);
             Name = "MainScreen";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "MyMusicals";
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).EndInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).EndInit();
             ResumeLayout(false);

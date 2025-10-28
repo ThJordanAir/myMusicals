@@ -3,6 +3,7 @@ using myMusicals.Services;
 using myMusicals.Views;
 using SQLitePCL;
 using System;
+using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace myMusicals
@@ -20,7 +21,7 @@ namespace myMusicals
 
         private void LoadTheaters()
         {
-            System.Diagnostics.Debug.WriteLine("jetzt LoadTheaters");
+            // System.Diagnostics.Debug.WriteLine("jetzt LoadTheaters");
             var theaters = Theater.GetAll();
             dgvTheaters.DataSource = theaters;
         }
@@ -32,13 +33,35 @@ namespace myMusicals
                 Title = ""
             };
             TheaterMask newForm = new TheaterMask(newTheater);
-            System.Diagnostics.Debug.WriteLine("jetzt 1");
             newForm.ShowDialog();
-            System.Diagnostics.Debug.WriteLine("jetzt 2");
             LoadTheaters();
-            System.Diagnostics.Debug.WriteLine("jetzt 3");
             dgvTheaters.Refresh();
-            System.Diagnostics.Debug.WriteLine("jetzt 4");
+        }
+
+        private void dgvTheaters_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ignoriere Header-Klicks
+            if (e.RowIndex < 0)
+                return;
+
+            // Hole den ausgewählten Datensatz
+            var row = dgvTheaters.Rows[e.RowIndex];
+            int theaterId = Convert.ToInt32(row.Cells[0].Value);
+            string title = row.Cells[1].Value.ToString();
+
+            // Theater-Objekt erstellen oder laden
+            Theater selectedTheater = new Theater
+            {
+                Id = theaterId,
+                Title = title
+            };
+
+            // Detail- oder Bearbeitungsfenster öffnen
+            TheaterMask form = new TheaterMask(selectedTheater);
+            form.ShowDialog();
+
+            // Nach dem Schließen ggf. neu laden:
+            LoadTheaters();
         }
     }
 }

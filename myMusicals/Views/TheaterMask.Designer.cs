@@ -69,6 +69,7 @@
             Controls.Add(btDelete);
             Controls.Add(tbTheaterName);
             Name = "TheaterMask";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Theater";
             Load += TheaterMask_Load;
             ResumeLayout(false);
