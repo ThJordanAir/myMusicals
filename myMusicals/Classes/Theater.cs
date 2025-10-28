@@ -34,21 +34,10 @@ namespace myMusicals.Classes
             Rows = rows;
             Seats = seats;
         }
-        public dynamic Save()
-        {
-            if (Id == 0)
-            {
-                return Insert();
-            }
-            return Update();
-        }
-
-        // Tabelle erstellen
         public static void CreateTable()
         {
             using var conn = Database.GetConnection();
             conn.Open();
-
             using var cmd = conn.CreateCommand();
             cmd.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Theaters (
@@ -60,6 +49,17 @@ namespace myMusicals.Classes
             ";
             cmd.ExecuteNonQuery();
         }
+
+        public dynamic Save()
+        {
+            if (Id == 0)
+            {
+                return Insert();
+            }
+            return Update();
+        }
+
+        // Tabelle erstellen
 
         // Ein Theater einfügen
         public dynamic Insert()
@@ -102,6 +102,30 @@ namespace myMusicals.Classes
             return cmd.ExecuteNonQuery();
         }
 
+        // ein Theater abrufen
+        public static Theater Get( int ID )
+        {
+            using var conn = Database.GetConnection();
+            conn.Open();
+
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Id, Title, Rows, Seats FROM Theaters WHERE Id = @id;";
+            cmd.Parameters.AddWithValue("@id", ID);
+
+            using var reader = cmd.ExecuteReader();
+            if(reader.Read())
+            {
+                Theater readTheater = new Theater(
+                    reader.GetInt32(0),
+                    reader.GetString(1),
+                    reader.GetInt32(2),
+                    reader.GetInt32(3)
+                );
+                return readTheater;
+            }
+            return null;
+        }
+
         // Alle Theater abrufen
         public static List<Theater> GetAll()
         {
@@ -126,9 +150,5 @@ namespace myMusicals.Classes
 
             return theaters;
         }
-
-
-
-
     }
 }

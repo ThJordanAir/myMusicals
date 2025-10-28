@@ -33,6 +33,8 @@
             btSave = new Button();
             nUDRows = new NumericUpDown();
             nUDSeats = new NumericUpDown();
+            lRows = new Label();
+            lSeats = new Label();
             ((System.ComponentModel.ISupportInitialize)nUDRows).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nUDSeats).BeginInit();
             SuspendLayout();
@@ -46,9 +48,9 @@
             // 
             // btDelete
             // 
-            btDelete.Location = new Point(12, 191);
+            btDelete.Location = new Point(12, 70);
             btDelete.Name = "btDelete";
-            btDelete.Size = new Size(75, 23);
+            btDelete.Size = new Size(162, 23);
             btDelete.TabIndex = 1;
             btDelete.Text = "löschen";
             btDelete.UseVisualStyleBackColor = true;
@@ -56,9 +58,9 @@
             // 
             // btSave
             // 
-            btSave.Location = new Point(267, 191);
+            btSave.Location = new Point(180, 70);
             btSave.Name = "btSave";
-            btSave.Size = new Size(75, 23);
+            btSave.Size = new Size(162, 23);
             btSave.TabIndex = 2;
             btSave.Text = "speichern";
             btSave.UseVisualStyleBackColor = true;
@@ -66,23 +68,43 @@
             // 
             // nUDRows
             // 
-            nUDRows.Location = new Point(77, 41);
+            nUDRows.Location = new Point(61, 41);
             nUDRows.Name = "nUDRows";
-            nUDRows.Size = new Size(120, 23);
+            nUDRows.Size = new Size(78, 23);
             nUDRows.TabIndex = 3;
             // 
             // nUDSeats
             // 
-            nUDSeats.Location = new Point(77, 70);
+            nUDSeats.Location = new Point(261, 41);
             nUDSeats.Name = "nUDSeats";
-            nUDSeats.Size = new Size(120, 23);
+            nUDSeats.Size = new Size(78, 23);
             nUDSeats.TabIndex = 4;
+            // 
+            // lRows
+            // 
+            lRows.AutoSize = true;
+            lRows.Location = new Point(12, 43);
+            lRows.Name = "lRows";
+            lRows.Size = new Size(43, 15);
+            lRows.TabIndex = 5;
+            lRows.Text = "Reihen";
+            // 
+            // lSeats
+            // 
+            lSeats.AutoSize = true;
+            lSeats.Location = new Point(180, 43);
+            lSeats.Name = "lSeats";
+            lSeats.Size = new Size(75, 15);
+            lSeats.TabIndex = 6;
+            lSeats.Text = "Sitze je Reihe";
             // 
             // TheaterMask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(354, 287);
+            ClientSize = new Size(354, 106);
+            Controls.Add(lSeats);
+            Controls.Add(lRows);
             Controls.Add(nUDSeats);
             Controls.Add(nUDRows);
             Controls.Add(btSave);
@@ -105,5 +127,7 @@
         private Button btSave;
         private NumericUpDown nUDRows;
         private NumericUpDown nUDSeats;
+        private Label lRows;
+        private Label lSeats;
     }
 }

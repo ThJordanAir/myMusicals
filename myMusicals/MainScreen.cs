@@ -16,6 +16,7 @@ namespace myMusicals
             Batteries.Init(); // 👈 Do this first
             Database.Initialize();
             Theater.CreateTable();
+            Musical.CreateTable();
             LoadTheaters();
         }
 
@@ -25,8 +26,14 @@ namespace myMusicals
             var theaters = Theater.GetAll();
             dgvTheaters.DataSource = theaters;
         }
+        private void LoadMusicals(Theater theater)
+        {
+            // System.Diagnostics.Debug.WriteLine("jetzt LoadTheaters");
+            var musicals = Musical.GetAll(theater.Id);
+            dGVMusicals.DataSource = musicals;
+        }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddTheater_Click(object sender, EventArgs e)
         {
             Theater newTheater = new Theater()
             {
@@ -40,28 +47,36 @@ namespace myMusicals
 
         private void dgvTheaters_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Ignoriere Header-Klicks
-            if (e.RowIndex < 0)
-                return;
+            if (e.RowIndex < 0) return;
 
-            // Hole den ausgewählten Datensatz
             var row = dgvTheaters.Rows[e.RowIndex];
             int theaterId = Convert.ToInt32(row.Cells[0].Value);
-            string title = row.Cells[1].Value.ToString();
 
-            // Theater-Objekt erstellen oder laden
-            Theater selectedTheater = new Theater
-            {
-                Id = theaterId,
-                Title = title
-            };
-
-            // Detail- oder Bearbeitungsfenster öffnen
+            Theater selectedTheater = Theater.Get(theaterId);
             TheaterMask form = new TheaterMask(selectedTheater);
             form.ShowDialog();
-
-            // Nach dem Schließen ggf. neu laden:
             LoadTheaters();
+        }
+
+        private void btnAddMusical_Click(object sender, EventArgs e)
+        {
+            if (dgvTheaters.CurrentRow == null || dgvTheaters.CurrentRow.Index < 0)
+            {
+                MessageBox.Show("Bitte wähle erst ein Theater aus!");
+                return;
+            }
+
+        }
+
+        private void dgvTheaters_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dgvTheaters.Rows[e.RowIndex];
+            int theaterId = Convert.ToInt32(row.Cells[0].Value);
+
+            Theater selectedTheater = Theater.Get(theaterId);
+            LoadMusicals(selectedTheater);
         }
     }
 }
