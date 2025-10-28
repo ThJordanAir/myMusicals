@@ -160,6 +160,7 @@
             dGVMusicals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dGVMusicals.Size = new Size(320, 404);
             dGVMusicals.TabIndex = 1;
+            dGVMusicals.CellDoubleClick += dGVMusicals_CellDoubleClick;
             // 
             // dataGridViewTextBoxColumn1
             // 
