@@ -31,6 +31,10 @@
             tbTheaterName = new TextBox();
             btDelete = new Button();
             btSave = new Button();
+            nUDRows = new NumericUpDown();
+            nUDSeats = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)nUDRows).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nUDSeats).BeginInit();
             SuspendLayout();
             // 
             // tbTheaterName
@@ -42,7 +46,7 @@
             // 
             // btDelete
             // 
-            btDelete.Location = new Point(12, 41);
+            btDelete.Location = new Point(12, 191);
             btDelete.Name = "btDelete";
             btDelete.Size = new Size(75, 23);
             btDelete.TabIndex = 1;
@@ -52,7 +56,7 @@
             // 
             // btSave
             // 
-            btSave.Location = new Point(267, 41);
+            btSave.Location = new Point(267, 191);
             btSave.Name = "btSave";
             btSave.Size = new Size(75, 23);
             btSave.TabIndex = 2;
@@ -60,11 +64,27 @@
             btSave.UseVisualStyleBackColor = true;
             btSave.Click += btSave_Click;
             // 
+            // nUDRows
+            // 
+            nUDRows.Location = new Point(77, 41);
+            nUDRows.Name = "nUDRows";
+            nUDRows.Size = new Size(120, 23);
+            nUDRows.TabIndex = 3;
+            // 
+            // nUDSeats
+            // 
+            nUDSeats.Location = new Point(77, 70);
+            nUDSeats.Name = "nUDSeats";
+            nUDSeats.Size = new Size(120, 23);
+            nUDSeats.TabIndex = 4;
+            // 
             // TheaterMask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(354, 74);
+            ClientSize = new Size(354, 287);
+            Controls.Add(nUDSeats);
+            Controls.Add(nUDRows);
             Controls.Add(btSave);
             Controls.Add(btDelete);
             Controls.Add(tbTheaterName);
@@ -72,6 +92,8 @@
             StartPosition = FormStartPosition.CenterParent;
             Text = "Theater";
             Load += TheaterMask_Load;
+            ((System.ComponentModel.ISupportInitialize)nUDRows).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nUDSeats).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -81,5 +103,7 @@
         private TextBox tbTheaterName;
         private Button btDelete;
         private Button btSave;
+        private NumericUpDown nUDRows;
+        private NumericUpDown nUDSeats;
     }
 }

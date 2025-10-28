@@ -27,11 +27,15 @@ namespace myMusicals.Views
                         lblAlter.Text = _person.Alter.ToString();
             */
             tbTheaterName.Text = _theater.Title;
+            nUDRows.Value = _theater.Rows;
+            nUDSeats.Value = _theater.Seats;
         }
 
         private void btSave_Click(object sender, EventArgs e)
         {
             _theater.Title = tbTheaterName.Text;
+            _theater.Rows = (int)nUDRows.Value;
+            _theater.Seats = (int)nUDSeats.Value;
             _theater.Save();
             this.Close();
         }

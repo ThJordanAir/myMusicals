@@ -30,12 +30,10 @@
         {
             components = new System.ComponentModel.Container();
             dgvTheaters = new DataGridView();
-            theaterBindingSource = new BindingSource(components);
-            btnAdd = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            theaterBindingSource = new BindingSource(components);
+            btnAdd = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             SuspendLayout();
@@ -57,38 +55,6 @@
             dgvTheaters.TabIndex = 0;
             dgvTheaters.CellDoubleClick += dgvTheaters_CellDoubleClick;
             // 
-            // theaterBindingSource
-            // 
-            theaterBindingSource.DataSource = typeof(Classes.Theater);
-            // 
-            // btnAdd
-            // 
-            btnAdd.Location = new Point(400, 262);
-            btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(75, 23);
-            btnAdd.TabIndex = 1;
-            btnAdd.Text = "ADD";
-            btnAdd.UseVisualStyleBackColor = true;
-            btnAdd.Click += btnAdd_Click;
-            // 
-            // btnEdit
-            // 
-            btnEdit.Location = new Point(481, 262);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(75, 23);
-            btnEdit.TabIndex = 2;
-            btnEdit.Text = "EDIT";
-            btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(562, 262);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(75, 23);
-            btnDelete.TabIndex = 3;
-            btnDelete.Text = "DELETE";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
             // idDataGridViewTextBoxColumn
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -105,13 +71,25 @@
             titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
             titleDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // theaterBindingSource
+            // 
+            theaterBindingSource.DataSource = typeof(Classes.Theater);
+            // 
+            // btnAdd
+            // 
+            btnAdd.Location = new Point(617, 262);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(171, 23);
+            btnAdd.TabIndex = 1;
+            btnAdd.Text = "neues Theater anlegen";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnDelete);
-            Controls.Add(btnEdit);
             Controls.Add(btnAdd);
             Controls.Add(dgvTheaters);
             Name = "MainScreen";
@@ -127,8 +105,6 @@
         private DataGridView dgvTheaters;
         private BindingSource theaterBindingSource;
         private Button btnAdd;
-        private Button btnEdit;
-        private Button btnDelete;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
     }

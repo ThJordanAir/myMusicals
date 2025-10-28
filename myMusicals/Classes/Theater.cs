@@ -11,6 +11,8 @@ namespace myMusicals.Classes
     {
         public int Id { get; set; } = 0;
         public string Title { get; set; } = "leer";
+        public int Rows { get; set; } = 10;
+        public int Seats { get; set; } = 25;
 
         public Theater() {
             CreateTable();
@@ -25,7 +27,13 @@ namespace myMusicals.Classes
         {
             Id = id;
         }
-
+        public Theater(int id, string title, int rows, int seats)
+        {
+            Id = id;
+            Title = title;
+            Rows = rows;
+            Seats = seats;
+        }
         public dynamic Save()
         {
             if (Id == 0)
@@ -45,7 +53,9 @@ namespace myMusicals.Classes
             cmd.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Theaters (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Title TEXT NOT NULL
+                    Title TEXT NOT NULL,
+                    Rows INTEGER,
+                    Seats INTEGER
                 );
             ";
             cmd.ExecuteNonQuery();
@@ -58,8 +68,10 @@ namespace myMusicals.Classes
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = "INSERT INTO Theaters (Title) VALUES (@title); SELECT last_insert_rowid();";
+            cmd.CommandText = "INSERT INTO Theaters (Title, Rows, Seats) VALUES (@title , @rows, @seats); SELECT last_insert_rowid();";
             cmd.Parameters.AddWithValue("@title", Title);
+            cmd.Parameters.AddWithValue("@rows", Rows);
+            cmd.Parameters.AddWithValue("@seats", Seats);
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
 
@@ -70,8 +82,10 @@ namespace myMusicals.Classes
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = "UPDATE Theaters SET Title = @title WHERE Id = @id;";
+            cmd.CommandText = "UPDATE Theaters SET Title = @title, Rows = @rows, Seats = @seats WHERE Id = @id;";
             cmd.Parameters.AddWithValue("@title", Title);
+            cmd.Parameters.AddWithValue("@rows", Rows);
+            cmd.Parameters.AddWithValue("@seats", Seats);
             cmd.Parameters.AddWithValue("@id", Id);
             return cmd.ExecuteNonQuery();
         }
@@ -97,14 +111,16 @@ namespace myMusicals.Classes
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT Id, Title FROM Theaters ORDER BY Title ASC;";
+            cmd.CommandText = "SELECT Id, Title, Rows, Seats FROM Theaters ORDER BY Title ASC;";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 theaters.Add(new Theater(
                     reader.GetInt32(0),
-                    reader.GetString(1)
+                    reader.GetString(1),
+                    reader.GetInt32(2),
+                    reader.GetInt32(3)
                 ));
             }
 

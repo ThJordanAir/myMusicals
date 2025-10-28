@@ -27,6 +27,14 @@ namespace MyMusicals.Tests
         }
 
         [Test]
+        public void insertDBAnzahl()
+        {
+            theater = new Theater("TEST") { Rows = 22, Seats = 44};
+            int responseinsertId = theater.Save();
+            Assert.That(responseinsertId, Is.GreaterThan(0));
+        }
+
+        [Test]
         public void updateDB()
         {
             theater = new Theater("TEST");
@@ -34,6 +42,20 @@ namespace MyMusicals.Tests
             Assert.That(responseinsertId, Is.GreaterThan(0));
             theater.Id = responseinsertId;
             theater.Title = "Neuer Titel kommt bald";
+            int responseupdate = theater.Save();
+            Assert.That(responseupdate, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void updateDBAnzahl()
+        {
+            theater = new Theater("TEST");
+            int responseinsertId = theater.Save();
+            Assert.That(responseinsertId, Is.GreaterThan(0));
+            theater.Id = responseinsertId;
+            theater.Title = "Neuer Titel kommt bald";
+            theater.Rows = 66;
+            theater.Seats = 22;
             int responseupdate = theater.Save();
             Assert.That(responseupdate, Is.EqualTo(1));
         }
