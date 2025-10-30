@@ -147,7 +147,6 @@ namespace myMusicals.Classes
                     reader.GetInt32(3)
                 ));
             }
-
             return theaters;
         }
     }

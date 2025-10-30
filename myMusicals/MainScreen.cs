@@ -5,12 +5,19 @@ using SQLitePCL;
 using System;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Timer = System.Windows.Forms.Timer;
 
 namespace myMusicals
 {
     public partial class MainScreen : Form
     {
         Theater mainTheater = new Theater();
+
+        private bool isExpanded = true;
+        private int fullWidth;
+        private Timer slideTimer;
+        private int step = 10;
+
         public MainScreen()
         {
             InitializeComponent();
@@ -19,6 +26,18 @@ namespace myMusicals
             Theater.CreateTable();
             Musical.CreateTable();
             LoadTheaters();
+
+            fullWidth = tcTheaters.Width;
+
+            // Timer konfigurieren
+            slideTimer = new Timer();
+            slideTimer.Interval = 15;
+            slideTimer.Tick += SlideTimer_Tick;
+
+            // Button "heften"
+            // btSlider1.Parent = tcTheaters;
+            btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            tcTheaters.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
         }
 
         private void LoadTheaters()
@@ -105,6 +124,53 @@ namespace myMusicals
             MusicalMask form = new MusicalMask(selectedMusical, mainTheater);
             form.ShowDialog();
             LoadMusicals();
+        }
+
+        private void btSlider1_Click(object sender, EventArgs e)
+        {
+            if (!slideTimer.Enabled)
+                slideTimer.Start();
+        }
+
+        private void SlideTimer_Tick(object sender, EventArgs e)
+        {
+            if (isExpanded)
+            {
+                // Panel nach links "zusammenschieben"
+                if (tcTheaters.Location.X <= (fullWidth * -1))
+                {
+                    tcTheaters.Visible = false;
+                    slideTimer.Stop();
+                    btSlider1.Text = "SHOW";
+                    isExpanded = false;
+                }
+                else
+                    // pTheaters.Location.X -= step;
+                    tcTheaters.Location = new Point(tcTheaters.Location.X - step, tcTheaters.Location.Y);
+            }
+            else
+            {
+                tcTheaters.Visible = true;
+
+                if (tcTheaters.Location.X < 0)
+                {
+                    tcTheaters.Location = new Point(tcTheaters.Location.X + step, tcTheaters.Location.Y);
+                }
+                else
+                {
+                    // Panel ist wieder an der ursprünglichen Position
+                    tcTheaters.Location = new Point(0, tcTheaters.Location.Y);
+                    slideTimer.Stop();
+                    btSlider1.Text = "HIDE";
+                    isExpanded = true;
+                }
+            }
+            btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth, btSlider1.Location.Y);
+        }
+
+        private void MainScreen_Resize(object sender, EventArgs e)
+        {
+            btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth, btSlider1.Location.Y);
         }
     }
 }
