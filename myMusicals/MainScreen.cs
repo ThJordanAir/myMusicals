@@ -13,9 +13,11 @@ namespace myMusicals
     {
         Theater mainTheater = new Theater();
 
+        private bool useTimer1 = false;
         private bool isExpanded1 = true;
         private int fullWidth1;
         private Timer slideTimer1;
+        private bool useTimer2 = true;
         private bool isExpanded2 = true;
         private int fullWidth2;
         private Timer slideTimer2;
@@ -44,7 +46,7 @@ namespace myMusicals
 
             // Button "heften"
             // btSlider1.Parent = tcTheaters;
-            btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            // btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             tcTheaters.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             tcCustomers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
         }
@@ -137,8 +139,33 @@ namespace myMusicals
 
         private void btSlider1_Click(object sender, EventArgs e)
         {
-            if (!slideTimer1.Enabled)
-                slideTimer1.Start();
+            if (useTimer1)
+            {
+                if (!slideTimer1.Enabled)
+                    slideTimer1.Start();
+            }
+            else
+            {
+                if (isExpanded1)
+                {
+                    tcTheaters.Visible = false;
+                    tcTheaters.Location = new Point((fullWidth1 * -1), tcTheaters.Location.Y);
+                    btSlider1.Text = "SHOW";
+                    isExpanded1 = false;
+                }
+                else
+                {
+                    tcTheaters.Visible = true;
+                    tcTheaters.Location = new Point(0, tcTheaters.Location.Y);
+                    btSlider1.Text = "HIDE";
+                    isExpanded1 = true;
+                    tcTheaters.BringToFront();
+                    btSlider1.BringToFront();
+                }
+                btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, btSlider1.Location.Y);
+            }
+
+
         }
         private void btSlider2_Click(object sender, EventArgs e)
         {
@@ -173,6 +200,9 @@ namespace myMusicals
                     slideTimer1.Stop();
                     btSlider1.Text = "HIDE";
                     isExpanded1 = true;
+                    tcTheaters.BringToFront();
+                    btSlider1.BringToFront();
+
                 }
             }
             btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, btSlider1.Location.Y);
@@ -204,17 +234,17 @@ namespace myMusicals
                     slideTimer2.Stop();
                     btSlider2.Text = "HIDE";
                     isExpanded2 = true;
+                    tcCustomers.BringToFront();
+                    btSlider2.BringToFront();
                 }
             }
             btSlider2.Location = new Point(tcCustomers.Location.X - btSlider2.Width, btSlider2.Location.Y);
-            System.Diagnostics.Debug.WriteLine(tcCustomers.Location.X);
-            System.Diagnostics.Debug.WriteLine(btSlider2.Location.X);
-
         }
 
         private void MainScreen_Resize(object sender, EventArgs e)
         {
-            btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, btSlider1.Location.Y);
+            btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, 0); // btSlider1.Location.Y
+            btSlider2.Location = new Point(tcCustomers.Location.X - btSlider2.Width, 0); // btSlider2.Location.Y
         }
 
     }

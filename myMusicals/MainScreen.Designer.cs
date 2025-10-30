@@ -54,6 +54,9 @@
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
             btSlider2 = new Button();
+            pSeatControll = new Panel();
+            panel1 = new Panel();
+            pSeatsButtons = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             pTheaters.SuspendLayout();
@@ -66,6 +69,7 @@
             tpTheater.SuspendLayout();
             tpMusical.SuspendLayout();
             tcCustomers.SuspendLayout();
+            pSeatControll.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTheaters
@@ -268,7 +272,7 @@
             // 
             // btSlider1
             // 
-            btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btSlider1.Anchor = AnchorStyles.None;
             btSlider1.Location = new Point(452, 0);
             btSlider1.Name = "btSlider1";
             btSlider1.Size = new Size(20, 138);
@@ -309,7 +313,7 @@
             // 
             // btSlider2
             // 
-            btSlider2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btSlider2.Anchor = AnchorStyles.None;
             btSlider2.Location = new Point(614, 0);
             btSlider2.Name = "btSlider2";
             btSlider2.Size = new Size(20, 138);
@@ -317,6 +321,35 @@
             btSlider2.Text = "HIDE";
             btSlider2.UseVisualStyleBackColor = true;
             btSlider2.Click += btSlider2_Click;
+            // 
+            // pSeatControll
+            // 
+            pSeatControll.Controls.Add(panel1);
+            pSeatControll.Controls.Add(pSeatsButtons);
+            pSeatControll.Dock = DockStyle.Fill;
+            pSeatControll.Location = new Point(0, 0);
+            pSeatControll.Margin = new Padding(0);
+            pSeatControll.Name = "pSeatControll";
+            pSeatControll.Padding = new Padding(30, 0, 30, 0);
+            pSeatControll.Size = new Size(1084, 466);
+            pSeatControll.TabIndex = 9;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Aqua;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(30, 39);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1024, 427);
+            panel1.TabIndex = 0;
+            // 
+            // pSeatsButtons
+            // 
+            pSeatsButtons.Dock = DockStyle.Top;
+            pSeatsButtons.Location = new Point(30, 0);
+            pSeatsButtons.Name = "pSeatsButtons";
+            pSeatsButtons.Size = new Size(1024, 39);
+            pSeatsButtons.TabIndex = 0;
             // 
             // MainScreen
             // 
@@ -327,6 +360,7 @@
             Controls.Add(tcCustomers);
             Controls.Add(btSlider1);
             Controls.Add(tcTheaters);
+            Controls.Add(pSeatControll);
             Name = "MainScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyMusicals";
@@ -343,6 +377,7 @@
             tpTheater.ResumeLayout(false);
             tpMusical.ResumeLayout(false);
             tcCustomers.ResumeLayout(false);
+            pSeatControll.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -373,5 +408,8 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private Button btSlider2;
+        private Panel pSeatControll;
+        private Panel panel1;
+        private Panel pSeatsButtons;
     }
 }
