@@ -50,6 +50,9 @@
             tpTheater = new TabPage();
             tpMusical = new TabPage();
             btSlider1 = new Button();
+            tcCustomers = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             pTheaters.SuspendLayout();
@@ -61,6 +64,7 @@
             tcTheaters.SuspendLayout();
             tpTheater.SuspendLayout();
             tpMusical.SuspendLayout();
+            tcCustomers.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTheaters
@@ -272,11 +276,42 @@
             btSlider1.UseVisualStyleBackColor = true;
             btSlider1.Click += btSlider1_Click;
             // 
+            // tcCustomers
+            // 
+            tcCustomers.Controls.Add(tabPage1);
+            tcCustomers.Controls.Add(tabPage2);
+            tcCustomers.Location = new Point(634, 0);
+            tcCustomers.Name = "tcCustomers";
+            tcCustomers.SelectedIndex = 0;
+            tcCustomers.Size = new Size(450, 473);
+            tcCustomers.TabIndex = 7;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(442, 445);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(192, 72);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 473);
+            Controls.Add(tcCustomers);
             Controls.Add(btSlider1);
             Controls.Add(tcTheaters);
             Name = "MainScreen";
@@ -294,6 +329,7 @@
             tcTheaters.ResumeLayout(false);
             tpTheater.ResumeLayout(false);
             tpMusical.ResumeLayout(false);
+            tcCustomers.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -320,5 +356,8 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn Price;
         private Button btSlider1;
+        private TabControl tcCustomers;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
     }
 }

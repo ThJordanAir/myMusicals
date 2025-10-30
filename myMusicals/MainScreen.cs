@@ -25,6 +25,7 @@ namespace myMusicals
             Database.Initialize();
             Theater.CreateTable();
             Musical.CreateTable();
+            Guest.CreateTable();
             LoadTheaters();
 
             fullWidth = tcTheaters.Width;
@@ -38,6 +39,7 @@ namespace myMusicals
             // btSlider1.Parent = tcTheaters;
             btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             tcTheaters.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            tcCustomers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
         }
 
         private void LoadTheaters()
@@ -136,7 +138,6 @@ namespace myMusicals
         {
             if (isExpanded)
             {
-                // Panel nach links "zusammenschieben"
                 if (tcTheaters.Location.X <= (fullWidth * -1))
                 {
                     tcTheaters.Visible = false;
@@ -145,7 +146,6 @@ namespace myMusicals
                     isExpanded = false;
                 }
                 else
-                    // pTheaters.Location.X -= step;
                     tcTheaters.Location = new Point(tcTheaters.Location.X - step, tcTheaters.Location.Y);
             }
             else
@@ -158,7 +158,6 @@ namespace myMusicals
                 }
                 else
                 {
-                    // Panel ist wieder an der ursprünglichen Position
                     tcTheaters.Location = new Point(0, tcTheaters.Location.Y);
                     slideTimer.Stop();
                     btSlider1.Text = "HIDE";
