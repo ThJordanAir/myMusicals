@@ -53,6 +53,7 @@
             tcCustomers = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            btSlider2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             pTheaters.SuspendLayout();
@@ -268,7 +269,7 @@
             // btSlider1
             // 
             btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btSlider1.Location = new Point(449, 0);
+            btSlider1.Location = new Point(452, 0);
             btSlider1.Name = "btSlider1";
             btSlider1.Size = new Size(20, 138);
             btSlider1.TabIndex = 6;
@@ -301,16 +302,28 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(192, 72);
+            tabPage2.Size = new Size(442, 445);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btSlider2
+            // 
+            btSlider2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btSlider2.Location = new Point(614, 0);
+            btSlider2.Name = "btSlider2";
+            btSlider2.Size = new Size(20, 138);
+            btSlider2.TabIndex = 8;
+            btSlider2.Text = "HIDE";
+            btSlider2.UseVisualStyleBackColor = true;
+            btSlider2.Click += btSlider2_Click;
             // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 473);
+            ClientSize = new Size(1084, 466);
+            Controls.Add(btSlider2);
             Controls.Add(tcCustomers);
             Controls.Add(btSlider1);
             Controls.Add(tcTheaters);
@@ -359,5 +372,6 @@
         private TabControl tcCustomers;
         private TabPage tabPage1;
         private TabPage tabPage2;
+        private Button btSlider2;
     }
 }
