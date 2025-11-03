@@ -4,7 +4,9 @@ using myMusicals.Views;
 using SQLitePCL;
 using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 using Timer = System.Windows.Forms.Timer;
 
 namespace myMusicals
@@ -12,6 +14,9 @@ namespace myMusicals
     public partial class MainScreen : Form
     {
         Theater mainTheater = new Theater();
+        Musical mainMusical = new Musical();
+        //private Theater _theater;
+        //private Musical _musical;
 
         private bool useTimer1 = false;
         private bool isExpanded1 = true;
@@ -23,6 +28,8 @@ namespace myMusicals
         private Timer slideTimer2;
         private int step = 2;
 
+        private Button[,] mainSeats;
+
         public MainScreen()
         {
             InitializeComponent();
@@ -32,6 +39,12 @@ namespace myMusicals
             Musical.CreateTable();
             Guest.CreateTable();
             LoadTheaters();
+
+            tcCustomers.BringToFront();
+            tcTheaters.BringToFront();
+            btSlider1.BringToFront();
+            btSlider2.BringToFront();
+
 
             fullWidth1 = tcTheaters.Width;
             fullWidth2 = tcCustomers.Width;
@@ -119,6 +132,10 @@ namespace myMusicals
             var row = dgvTheaters.Rows[e.RowIndex];
             int theaterId = Convert.ToInt32(row.Cells[0].Value);
             mainTheater = Theater.Get(theaterId);
+            lTheaterName.Text = mainTheater.Title;
+            lMusicalName.Location = new Point(lTheaterName.Location.X + lTheaterName.Size.Width, lTheaterName.Location.Y);
+            lMusicalName.Text = "bitte Musical auswählen";
+            CreateSeatsGrid();
             LoadMusicals();
         }
 
@@ -247,5 +264,80 @@ namespace myMusicals
             btSlider2.Location = new Point(tcCustomers.Location.X - btSlider2.Width, 0); // btSlider2.Location.Y
         }
 
+        private void dGVMusicals_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dGVMusicals.Rows[e.RowIndex];
+            int musicalId = Convert.ToInt32(row.Cells[0].Value);
+            mainMusical = Musical.Get(musicalId);
+            lMusicalName.Text = mainMusical.Title;
+        }
+
+
+        private void CreateSeatsGrid()
+        {
+            RemoveSeats();
+            mainSeats = new Button[mainTheater.Rows, mainTheater.Seats];
+            for (int r = 0; r < mainTheater.Rows; r++)
+            {
+                for (int c = 0; c < mainTheater.Seats; c++)
+                {
+                    Button btn = new Button();
+                    btn.Text = $"{r},{c}";
+                    btn.Margin = new Padding(0);
+                    btn.Tag = (r, c);
+                    // btn.Click += Btn_Click;
+
+                    pSeats.Controls.Add(btn);
+                    mainSeats[r, c] = btn;
+                }
+            }
+
+            ResizeSeats();
+        }
+
+        private void ResizeSeats()
+        {
+            if (mainSeats == null) return;
+
+            int panelWidth = pSeats.ClientSize.Width;
+            int panelHeight = pSeats.ClientSize.Height;
+
+            int buttonWidth = panelWidth / mainTheater.Seats;
+            int buttonHeight = panelHeight / mainTheater.Rows;
+
+            for (int r = 0; r < mainTheater.Rows; r++)
+            {
+                for (int c = 0; c < mainTheater.Seats; c++)
+                {
+                    Button btn = mainSeats[r, c];
+                    btn.SetBounds(c * buttonWidth, r * buttonHeight, buttonWidth - 2, buttonHeight - 2);
+                }
+            }
+        }
+
+        private void RemoveSeats()
+        {
+            if (mainSeats == null) return;
+
+            for (int r = 0; r < mainSeats.GetLength(0); r++)
+            {
+                for (int c = 0; c < mainSeats.GetLength(1); c++)
+                {
+                    Button btn = mainSeats[r, c];
+                    if (btn != null)
+                    {
+                        btn.Parent?.Controls.Remove(btn);
+                        btn.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void pSeats_SizeChanged(object sender, EventArgs e)
+        {
+            ResizeSeats();
+        }
     }
 }

@@ -55,8 +55,10 @@
             tabPage2 = new TabPage();
             btSlider2 = new Button();
             pSeatControll = new Panel();
-            panel1 = new Panel();
+            pSeats = new Panel();
             pSeatsButtons = new Panel();
+            lMusicalName = new Label();
+            lTheaterName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
             ((System.ComponentModel.ISupportInitialize)theaterBindingSource).BeginInit();
             pTheaters.SuspendLayout();
@@ -70,6 +72,7 @@
             tpMusical.SuspendLayout();
             tcCustomers.SuspendLayout();
             pSeatControll.SuspendLayout();
+            pSeatsButtons.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTheaters
@@ -198,6 +201,7 @@
             dGVMusicals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dGVMusicals.Size = new Size(436, 390);
             dGVMusicals.TabIndex = 1;
+            dGVMusicals.CellClick += dGVMusicals_CellClick;
             dGVMusicals.CellDoubleClick += dGVMusicals_CellDoubleClick;
             // 
             // dataGridViewTextBoxColumn1
@@ -324,7 +328,7 @@
             // 
             // pSeatControll
             // 
-            pSeatControll.Controls.Add(panel1);
+            pSeatControll.Controls.Add(pSeats);
             pSeatControll.Controls.Add(pSeatsButtons);
             pSeatControll.Dock = DockStyle.Fill;
             pSeatControll.Location = new Point(0, 0);
@@ -334,33 +338,56 @@
             pSeatControll.Size = new Size(1084, 466);
             pSeatControll.TabIndex = 9;
             // 
-            // panel1
+            // pSeats
             // 
-            panel1.BackColor = Color.Aqua;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(30, 39);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1024, 427);
-            panel1.TabIndex = 0;
+            pSeats.BackColor = Color.Aqua;
+            pSeats.Dock = DockStyle.Fill;
+            pSeats.Location = new Point(30, 39);
+            pSeats.Name = "pSeats";
+            pSeats.Size = new Size(1024, 427);
+            pSeats.TabIndex = 0;
+            pSeats.SizeChanged += pSeats_SizeChanged;
             // 
             // pSeatsButtons
             // 
+            pSeatsButtons.Controls.Add(lMusicalName);
+            pSeatsButtons.Controls.Add(lTheaterName);
             pSeatsButtons.Dock = DockStyle.Top;
             pSeatsButtons.Location = new Point(30, 0);
             pSeatsButtons.Name = "pSeatsButtons";
             pSeatsButtons.Size = new Size(1024, 39);
             pSeatsButtons.TabIndex = 0;
             // 
+            // lMusicalName
+            // 
+            lMusicalName.AutoSize = true;
+            lMusicalName.Font = new Font("Segoe UI", 18F, FontStyle.Italic);
+            lMusicalName.Location = new Point(104, 4);
+            lMusicalName.Name = "lMusicalName";
+            lMusicalName.Size = new Size(91, 32);
+            lMusicalName.TabIndex = 1;
+            lMusicalName.Text = "Musical";
+            // 
+            // lTheaterName
+            // 
+            lTheaterName.AutoSize = true;
+            lTheaterName.Font = new Font("Segoe UI", 18F, FontStyle.Underline);
+            lTheaterName.Location = new Point(3, 4);
+            lTheaterName.Name = "lTheaterName";
+            lTheaterName.Size = new Size(95, 32);
+            lTheaterName.TabIndex = 0;
+            lTheaterName.Text = "Theater";
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 466);
+            Controls.Add(pSeatControll);
             Controls.Add(btSlider2);
             Controls.Add(tcCustomers);
             Controls.Add(btSlider1);
             Controls.Add(tcTheaters);
-            Controls.Add(pSeatControll);
             Name = "MainScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyMusicals";
@@ -378,6 +405,8 @@
             tpMusical.ResumeLayout(false);
             tcCustomers.ResumeLayout(false);
             pSeatControll.ResumeLayout(false);
+            pSeatsButtons.ResumeLayout(false);
+            pSeatsButtons.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -409,7 +438,9 @@
         private TabPage tabPage2;
         private Button btSlider2;
         private Panel pSeatControll;
-        private Panel panel1;
+        private Panel pSeats;
         private Panel pSeatsButtons;
+        private Label lMusicalName;
+        private Label lTheaterName;
     }
 }
