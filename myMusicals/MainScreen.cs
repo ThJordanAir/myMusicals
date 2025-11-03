@@ -69,6 +69,9 @@ namespace myMusicals
             cbSlider1.Checked = useTimer1;
             cbSlider2.Checked = useTimer2;
 
+            cbSlider1.Anchor = AnchorStyles.Right;
+            cbSlider2.Anchor = AnchorStyles.Right;
+
             if (isExpanded1)
             {
                 tcTheaters.Visible = false;
@@ -419,6 +422,7 @@ namespace myMusicals
             var row = dgvGuests.Rows[e.RowIndex];
             int guestId = Convert.ToInt32(row.Cells[0].Value);
             mainGuest = Guest.Get(guestId);
+            lCustomerName.Text = mainGuest.Name;
             //lTheaterName.Text = mainGuest.Title;
             //lMusicalName.Location = new Point(lTheaterName.Location.X + lTheaterName.Size.Width, lTheaterName.Location.Y);
             //lMusicalName.Text = "bitte Musical auswählen";

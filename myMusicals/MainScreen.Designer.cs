@@ -69,6 +69,7 @@
             pSeatControll = new Panel();
             pSeats = new Panel();
             pSeatsButtons = new Panel();
+            lCustomerName = new Label();
             cbSlider2 = new CheckBox();
             cbSlider1 = new CheckBox();
             lMusicalName = new Label();
@@ -472,6 +473,7 @@
             // 
             // pSeatsButtons
             // 
+            pSeatsButtons.Controls.Add(lCustomerName);
             pSeatsButtons.Controls.Add(cbSlider2);
             pSeatsButtons.Controls.Add(cbSlider1);
             pSeatsButtons.Controls.Add(lMusicalName);
@@ -482,8 +484,20 @@
             pSeatsButtons.Size = new Size(1024, 39);
             pSeatsButtons.TabIndex = 0;
             // 
+            // lCustomerName
+            // 
+            lCustomerName.Anchor = AnchorStyles.Right;
+            lCustomerName.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lCustomerName.Location = new Point(525, 4);
+            lCustomerName.Name = "lCustomerName";
+            lCustomerName.Size = new Size(360, 32);
+            lCustomerName.TabIndex = 4;
+            lCustomerName.Text = "Kunden Name";
+            lCustomerName.TextAlign = ContentAlignment.TopRight;
+            // 
             // cbSlider2
             // 
+            cbSlider2.Anchor = AnchorStyles.Right;
             cbSlider2.AutoSize = true;
             cbSlider2.Location = new Point(950, 12);
             cbSlider2.Name = "cbSlider2";
@@ -495,6 +509,7 @@
             // 
             // cbSlider1
             // 
+            cbSlider1.Anchor = AnchorStyles.Right;
             cbSlider1.AutoSize = true;
             cbSlider1.Location = new Point(891, 12);
             cbSlider1.Name = "cbSlider1";
@@ -529,9 +544,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 466);
+            Controls.Add(pSeatControll);
             Controls.Add(tcTheaters);
             Controls.Add(tcCustomers);
-            Controls.Add(pSeatControll);
             Controls.Add(btSlider2);
             Controls.Add(btSlider1);
             Name = "MainScreen";
@@ -607,5 +622,6 @@
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn eMailDataGridViewTextBoxColumn;
+        private Label lCustomerName;
     }
 }
