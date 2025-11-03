@@ -139,7 +139,7 @@ namespace myMusicals.Classes
             conn.Open();
 
             using var cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT Id, Name, Phone, EMail FROM Guests ORDER BY Title ASC;";
+            cmd.CommandText = "SELECT Id, Name, Phone, EMail FROM Guests ORDER BY Name ASC;";
 
             using var reader = cmd.ExecuteReader();
             while (reader.Read())

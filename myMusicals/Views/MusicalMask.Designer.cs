@@ -59,14 +59,14 @@
             nUDPrice.Location = new Point(264, 41);
             nUDPrice.Name = "nUDPrice";
             nUDPrice.Size = new Size(78, 23);
-            nUDPrice.TabIndex = 7;
+            nUDPrice.TabIndex = 2;
             // 
             // btSave
             // 
             btSave.Location = new Point(180, 70);
             btSave.Name = "btSave";
             btSave.Size = new Size(162, 23);
-            btSave.TabIndex = 10;
+            btSave.TabIndex = 3;
             btSave.Text = "speichern";
             btSave.UseVisualStyleBackColor = true;
             btSave.Click += btSave_Click;
@@ -76,7 +76,7 @@
             btDelete.Location = new Point(12, 70);
             btDelete.Name = "btDelete";
             btDelete.Size = new Size(162, 23);
-            btDelete.TabIndex = 9;
+            btDelete.TabIndex = 4;
             btDelete.Text = "löschen";
             btDelete.UseVisualStyleBackColor = true;
             btDelete.Click += btDelete_Click;

@@ -51,12 +51,26 @@
             tpMusical = new TabPage();
             btSlider1 = new Button();
             tcCustomers = new TabControl();
-            tabPage1 = new TabPage();
+            tpCustomer = new TabPage();
+            pCustomer = new Panel();
+            dgvGuests = new DataGridView();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            phoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            eMailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            guestBindingSource = new BindingSource(components);
+            pCutsomerButtons = new Panel();
+            btnAddCutomer = new Button();
             tabPage2 = new TabPage();
+            titleDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            theaterIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            priceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             btSlider2 = new Button();
             pSeatControll = new Panel();
             pSeats = new Panel();
             pSeatsButtons = new Panel();
+            cbSlider2 = new CheckBox();
+            cbSlider1 = new CheckBox();
             lMusicalName = new Label();
             lTheaterName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTheaters).BeginInit();
@@ -71,6 +85,11 @@
             tpTheater.SuspendLayout();
             tpMusical.SuspendLayout();
             tcCustomers.SuspendLayout();
+            tpCustomer.SuspendLayout();
+            pCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvGuests).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)guestBindingSource).BeginInit();
+            pCutsomerButtons.SuspendLayout();
             pSeatControll.SuspendLayout();
             pSeatsButtons.SuspendLayout();
             SuspendLayout();
@@ -287,7 +306,7 @@
             // 
             // tcCustomers
             // 
-            tcCustomers.Controls.Add(tabPage1);
+            tcCustomers.Controls.Add(tpCustomer);
             tcCustomers.Controls.Add(tabPage2);
             tcCustomers.Location = new Point(634, 0);
             tcCustomers.Name = "tcCustomers";
@@ -295,15 +314,100 @@
             tcCustomers.Size = new Size(450, 473);
             tcCustomers.TabIndex = 7;
             // 
-            // tabPage1
+            // tpCustomer
             // 
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(442, 445);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            tpCustomer.Controls.Add(pCustomer);
+            tpCustomer.Location = new Point(4, 24);
+            tpCustomer.Name = "tpCustomer";
+            tpCustomer.Padding = new Padding(3);
+            tpCustomer.Size = new Size(442, 445);
+            tpCustomer.TabIndex = 0;
+            tpCustomer.Text = "Kunden";
+            tpCustomer.UseVisualStyleBackColor = true;
+            // 
+            // pCustomer
+            // 
+            pCustomer.Controls.Add(dgvGuests);
+            pCustomer.Controls.Add(pCutsomerButtons);
+            pCustomer.Dock = DockStyle.Fill;
+            pCustomer.Location = new Point(3, 3);
+            pCustomer.Name = "pCustomer";
+            pCustomer.Size = new Size(436, 439);
+            pCustomer.TabIndex = 3;
+            // 
+            // dgvGuests
+            // 
+            dgvGuests.AllowUserToAddRows = false;
+            dgvGuests.AllowUserToDeleteRows = false;
+            dgvGuests.AutoGenerateColumns = false;
+            dgvGuests.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvGuests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvGuests.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, nameDataGridViewTextBoxColumn, phoneDataGridViewTextBoxColumn, eMailDataGridViewTextBoxColumn });
+            dgvGuests.DataSource = guestBindingSource;
+            dgvGuests.Dock = DockStyle.Fill;
+            dgvGuests.Location = new Point(0, 0);
+            dgvGuests.Margin = new Padding(0);
+            dgvGuests.Name = "dgvGuests";
+            dgvGuests.ReadOnly = true;
+            dgvGuests.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvGuests.Size = new Size(436, 390);
+            dgvGuests.TabIndex = 2;
+            dgvGuests.CellClick += dgvGuests_CellClick;
+            dgvGuests.CellDoubleClick += dgvGuests_CellDoubleClick;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            idDataGridViewTextBoxColumn1.ReadOnly = true;
+            idDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // phoneDataGridViewTextBoxColumn
+            // 
+            phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
+            phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
+            phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+            phoneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // eMailDataGridViewTextBoxColumn
+            // 
+            eMailDataGridViewTextBoxColumn.DataPropertyName = "EMail";
+            eMailDataGridViewTextBoxColumn.HeaderText = "EMail";
+            eMailDataGridViewTextBoxColumn.Name = "eMailDataGridViewTextBoxColumn";
+            eMailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // guestBindingSource
+            // 
+            guestBindingSource.DataSource = typeof(Classes.Guest);
+            // 
+            // pCutsomerButtons
+            // 
+            pCutsomerButtons.Controls.Add(btnAddCutomer);
+            pCutsomerButtons.Dock = DockStyle.Bottom;
+            pCutsomerButtons.Location = new Point(0, 390);
+            pCutsomerButtons.Name = "pCutsomerButtons";
+            pCutsomerButtons.Padding = new Padding(10);
+            pCutsomerButtons.Size = new Size(436, 49);
+            pCutsomerButtons.TabIndex = 1;
+            // 
+            // btnAddCutomer
+            // 
+            btnAddCutomer.Dock = DockStyle.Fill;
+            btnAddCutomer.Location = new Point(10, 10);
+            btnAddCutomer.Name = "btnAddCutomer";
+            btnAddCutomer.Size = new Size(416, 29);
+            btnAddCutomer.TabIndex = 2;
+            btnAddCutomer.Text = "neuen Kunden anlegen";
+            btnAddCutomer.UseVisualStyleBackColor = true;
+            btnAddCutomer.Click += btnAddCutomer_Click;
             // 
             // tabPage2
             // 
@@ -314,6 +418,24 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // titleDataGridViewTextBoxColumn1
+            // 
+            titleDataGridViewTextBoxColumn1.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn1.HeaderText = "Title";
+            titleDataGridViewTextBoxColumn1.Name = "titleDataGridViewTextBoxColumn1";
+            // 
+            // theaterIdDataGridViewTextBoxColumn
+            // 
+            theaterIdDataGridViewTextBoxColumn.DataPropertyName = "TheaterId";
+            theaterIdDataGridViewTextBoxColumn.HeaderText = "TheaterId";
+            theaterIdDataGridViewTextBoxColumn.Name = "theaterIdDataGridViewTextBoxColumn";
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
             // 
             // btSlider2
             // 
@@ -340,7 +462,7 @@
             // 
             // pSeats
             // 
-            pSeats.BackColor = Color.Aqua;
+            pSeats.BackColor = Color.Transparent;
             pSeats.Dock = DockStyle.Fill;
             pSeats.Location = new Point(30, 39);
             pSeats.Name = "pSeats";
@@ -350,6 +472,8 @@
             // 
             // pSeatsButtons
             // 
+            pSeatsButtons.Controls.Add(cbSlider2);
+            pSeatsButtons.Controls.Add(cbSlider1);
             pSeatsButtons.Controls.Add(lMusicalName);
             pSeatsButtons.Controls.Add(lTheaterName);
             pSeatsButtons.Dock = DockStyle.Top;
@@ -357,6 +481,28 @@
             pSeatsButtons.Name = "pSeatsButtons";
             pSeatsButtons.Size = new Size(1024, 39);
             pSeatsButtons.TabIndex = 0;
+            // 
+            // cbSlider2
+            // 
+            cbSlider2.AutoSize = true;
+            cbSlider2.Location = new Point(950, 12);
+            cbSlider2.Name = "cbSlider2";
+            cbSlider2.Size = new Size(61, 19);
+            cbSlider2.TabIndex = 3;
+            cbSlider2.Text = "Rechts";
+            cbSlider2.UseVisualStyleBackColor = true;
+            cbSlider2.CheckedChanged += cbSlider2_CheckedChanged;
+            // 
+            // cbSlider1
+            // 
+            cbSlider1.AutoSize = true;
+            cbSlider1.Location = new Point(891, 12);
+            cbSlider1.Name = "cbSlider1";
+            cbSlider1.Size = new Size(53, 19);
+            cbSlider1.TabIndex = 2;
+            cbSlider1.Text = "Links";
+            cbSlider1.UseVisualStyleBackColor = true;
+            cbSlider1.CheckedChanged += cbSlider1_CheckedChanged;
             // 
             // lMusicalName
             // 
@@ -383,11 +529,11 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 466);
+            Controls.Add(tcTheaters);
+            Controls.Add(tcCustomers);
             Controls.Add(pSeatControll);
             Controls.Add(btSlider2);
-            Controls.Add(tcCustomers);
             Controls.Add(btSlider1);
-            Controls.Add(tcTheaters);
             Name = "MainScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyMusicals";
@@ -404,6 +550,11 @@
             tpTheater.ResumeLayout(false);
             tpMusical.ResumeLayout(false);
             tcCustomers.ResumeLayout(false);
+            tpCustomer.ResumeLayout(false);
+            pCustomer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvGuests).EndInit();
+            ((System.ComponentModel.ISupportInitialize)guestBindingSource).EndInit();
+            pCutsomerButtons.ResumeLayout(false);
             pSeatControll.ResumeLayout(false);
             pSeatsButtons.ResumeLayout(false);
             pSeatsButtons.PerformLayout();
@@ -434,7 +585,7 @@
         private DataGridViewTextBoxColumn Price;
         private Button btSlider1;
         private TabControl tcCustomers;
-        private TabPage tabPage1;
+        private TabPage tpCustomer;
         private TabPage tabPage2;
         private Button btSlider2;
         private Panel pSeatControll;
@@ -442,5 +593,19 @@
         private Panel pSeatsButtons;
         private Label lMusicalName;
         private Label lTheaterName;
+        private CheckBox cbSlider2;
+        private CheckBox cbSlider1;
+        private BindingSource guestBindingSource;
+        private Panel pCutsomerButtons;
+        private Button btnAddCutomer;
+        private Panel pCustomer;
+        private DataGridView dgvGuests;
+        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn theaterIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn eMailDataGridViewTextBoxColumn;
     }
 }

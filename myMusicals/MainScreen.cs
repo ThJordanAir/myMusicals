@@ -15,6 +15,8 @@ namespace myMusicals
     {
         Theater mainTheater = new Theater();
         Musical mainMusical = new Musical();
+        Guest mainGuest = new Guest();
+
         //private Theater _theater;
         //private Musical _musical;
 
@@ -22,7 +24,7 @@ namespace myMusicals
         private bool isExpanded1 = true;
         private int fullWidth1;
         private Timer slideTimer1;
-        private bool useTimer2 = true;
+        private bool useTimer2 = false;
         private bool isExpanded2 = true;
         private int fullWidth2;
         private Timer slideTimer2;
@@ -39,6 +41,7 @@ namespace myMusicals
             Musical.CreateTable();
             Guest.CreateTable();
             LoadTheaters();
+            LoadGuests();
 
             tcCustomers.BringToFront();
             tcTheaters.BringToFront();
@@ -62,6 +65,26 @@ namespace myMusicals
             // btSlider1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             tcTheaters.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             tcCustomers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+
+            cbSlider1.Checked = useTimer1;
+            cbSlider2.Checked = useTimer2;
+
+            if (isExpanded1)
+            {
+                tcTheaters.Visible = false;
+                tcTheaters.Location = new Point((fullWidth1 * -1), tcTheaters.Location.Y);
+                btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, btSlider1.Location.Y);
+                btSlider1.Text = "SHOW";
+                isExpanded1 = false;
+            }
+            if (isExpanded2)
+            {
+                tcCustomers.Visible = false;
+                tcCustomers.Location = new Point(this.ClientSize.Width, tcCustomers.Location.Y);
+                btSlider2.Location = new Point(tcCustomers.Location.X - btSlider2.Width, btSlider2.Location.Y);
+                btSlider2.Text = "SHOW";
+                isExpanded2 = false;
+            }
         }
 
         private void LoadTheaters()
@@ -79,6 +102,11 @@ namespace myMusicals
                 dGVMusicals.DataSource = musicals;
             }
         }
+        private void LoadGuests()
+        {
+            var guests = Guest.GetAll();
+            dgvGuests.DataSource = guests;
+        }
 
         private void btnAddTheater_Click(object sender, EventArgs e)
         {
@@ -91,6 +119,20 @@ namespace myMusicals
             LoadTheaters();
             dgvTheaters.Refresh();
         }
+
+        private void btnAddCutomer_Click(object sender, EventArgs e)
+        {
+            Guest newGuest = new Guest()
+            {
+                Name = ""
+            };
+            GuestMask newForm = new GuestMask(newGuest);
+            newForm.ShowDialog();
+            LoadGuests();
+            dgvGuests.Refresh();
+
+        }
+
 
         private void dgvTheaters_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -181,13 +223,35 @@ namespace myMusicals
                 }
                 btSlider1.Location = new Point(tcTheaters.Location.X + fullWidth1, btSlider1.Location.Y);
             }
-
-
         }
         private void btSlider2_Click(object sender, EventArgs e)
         {
-            if (!slideTimer2.Enabled)
-                slideTimer2.Start();
+            if (useTimer2)
+            {
+                if (!slideTimer2.Enabled)
+                    slideTimer2.Start();
+            }
+            else
+            {
+                if (isExpanded2)
+                {
+                    tcCustomers.Visible = false;
+                    tcCustomers.Location = new Point(this.ClientSize.Width, tcCustomers.Location.Y);
+                    btSlider2.Text = "SHOW";
+                    isExpanded2 = false;
+
+                }
+                else
+                {
+                    tcCustomers.Visible = true;
+                    tcCustomers.Location = new Point(this.ClientSize.Width - fullWidth2, tcCustomers.Location.Y);
+                    btSlider2.Text = "HIDE";
+                    isExpanded2 = true;
+                    tcCustomers.BringToFront();
+                    btSlider2.BringToFront();
+                }
+                btSlider2.Location = new Point(tcCustomers.Location.X - btSlider2.Width, btSlider2.Location.Y);
+            }
         }
 
         private void SlideTimer1_Tick(object sender, EventArgs e)
@@ -284,16 +348,14 @@ namespace myMusicals
                 for (int c = 0; c < mainTheater.Seats; c++)
                 {
                     Button btn = new Button();
-                    btn.Text = $"{r},{c}";
+                    btn.Text = $"{(r + 1)}/{(c + 1)}";
                     btn.Margin = new Padding(0);
                     btn.Tag = (r, c);
                     // btn.Click += Btn_Click;
-
                     pSeats.Controls.Add(btn);
                     mainSeats[r, c] = btn;
                 }
             }
-
             ResizeSeats();
         }
 
@@ -312,7 +374,7 @@ namespace myMusicals
                 for (int c = 0; c < mainTheater.Seats; c++)
                 {
                     Button btn = mainSeats[r, c];
-                    btn.SetBounds(c * buttonWidth, r * buttonHeight, buttonWidth - 2, buttonHeight - 2);
+                    btn.SetBounds((c * buttonWidth) + 2, (r * buttonHeight) + 2, buttonWidth, buttonHeight);
                 }
             }
         }
@@ -338,6 +400,41 @@ namespace myMusicals
         private void pSeats_SizeChanged(object sender, EventArgs e)
         {
             ResizeSeats();
+        }
+
+        private void cbSlider1_CheckedChanged(object sender, EventArgs e)
+        {
+            useTimer1 = cbSlider1.Checked;
+        }
+
+        private void cbSlider2_CheckedChanged(object sender, EventArgs e)
+        {
+            useTimer2 = cbSlider2.Checked;
+        }
+
+        private void dgvGuests_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dgvGuests.Rows[e.RowIndex];
+            int guestId = Convert.ToInt32(row.Cells[0].Value);
+            mainGuest = Guest.Get(guestId);
+            //lTheaterName.Text = mainGuest.Title;
+            //lMusicalName.Location = new Point(lTheaterName.Location.X + lTheaterName.Size.Width, lTheaterName.Location.Y);
+            //lMusicalName.Text = "bitte Musical auswählen";
+            //CreateSeatsGrid();
+            //LoadMusicals();
+        }
+
+        private void dgvGuests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            var row = dgvGuests.Rows[e.RowIndex];
+            int guestId = Convert.ToInt32(row.Cells[0].Value);
+            Guest selectedGuest = Guest.Get(guestId);
+            GuestMask form = new GuestMask(selectedGuest);
+            form.ShowDialog();
+            LoadGuests();
         }
     }
 }

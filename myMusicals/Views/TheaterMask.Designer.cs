@@ -44,14 +44,14 @@
             tbTheaterName.Location = new Point(12, 12);
             tbTheaterName.Name = "tbTheaterName";
             tbTheaterName.Size = new Size(330, 23);
-            tbTheaterName.TabIndex = 0;
+            tbTheaterName.TabIndex = 1;
             // 
             // btDelete
             // 
             btDelete.Location = new Point(12, 70);
             btDelete.Name = "btDelete";
             btDelete.Size = new Size(162, 23);
-            btDelete.TabIndex = 1;
+            btDelete.TabIndex = 5;
             btDelete.Text = "löschen";
             btDelete.UseVisualStyleBackColor = true;
             btDelete.Click += btDelete_Click;
@@ -61,7 +61,7 @@
             btSave.Location = new Point(180, 70);
             btSave.Name = "btSave";
             btSave.Size = new Size(162, 23);
-            btSave.TabIndex = 2;
+            btSave.TabIndex = 4;
             btSave.Text = "speichern";
             btSave.UseVisualStyleBackColor = true;
             btSave.Click += btSave_Click;
@@ -71,14 +71,14 @@
             nUDRows.Location = new Point(61, 41);
             nUDRows.Name = "nUDRows";
             nUDRows.Size = new Size(78, 23);
-            nUDRows.TabIndex = 3;
+            nUDRows.TabIndex = 2;
             // 
             // nUDSeats
             // 
             nUDSeats.Location = new Point(261, 41);
             nUDSeats.Name = "nUDSeats";
             nUDSeats.Size = new Size(78, 23);
-            nUDSeats.TabIndex = 4;
+            nUDSeats.TabIndex = 3;
             // 
             // lRows
             // 
